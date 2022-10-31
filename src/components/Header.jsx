@@ -1,16 +1,16 @@
 import styled from 'styled-components'
-import { useState} from 'react';
 import data from '../data.json'
 import chevronIcon from '../assets/icon-chevron.svg'
 import {Link} from 'react-router-dom'
+import { useEffect } from 'react'
 
-const Header = ({colors}) => {
-  const [barIsOpen, setBarIsOpen] = useState(false)
+const Header = ({colors, barIsOpen, setBarIsOpen}) => {
+
 
   return (
     <MainHeader >
         <nav>
-           <h1>THE PLANETS</h1>
+           <PlanetTitle to="/planets-fact-site">THE PLANETS</PlanetTitle>
             <svg style={{marginTop:'10px'}} onClick={()=>setBarIsOpen((prev)=>!prev)} xmlns="http://www.w3.org/2000/svg" width="24" height="17"><g fill={barIsOpen ? 'rgba(255,255,255,0.5)' : '#FFF'}  fillRule="evenodd"><path d="M0 0h24v3H0zM0 7h24v3H0zM0 14h24v3H0z"/></g></svg>
           </nav>
            
@@ -19,7 +19,7 @@ const Header = ({colors}) => {
        <Menu barIsOpen={barIsOpen}> 
          {data.map((item, index)=>{
             return <Items key={index}> 
-             <Elements color = {colors[index]} to={`/${item.name}`} onClick={()=>setBarIsOpen(false)}>
+             <Elements color = {colors[index]} to={`/planets/${item.name}`} onClick={()=>setBarIsOpen(false)}>
                 <div>
                 <span></span>
                  <p>{item.name}</p>
@@ -45,21 +45,23 @@ const MainHeader = styled.div`
     justify-content:space-between;
  }
 
-  h1{
+`
+const PlanetTitle= styled(Link)`
+    text-decoration:none;
     font-family: 'Antonio';
     font-style: normal;
     font-weight: 400;
     font-size: 28px;
     line-height: 36px;
+    color:white;
     letter-spacing: -1.05px;
     text-transform: uppercase;
-  }
 `
 
 const Menu = styled.div`
   display:flex;
   flex-direction:column;
-  transition:0.7s ease-in-out;
+  transition:0.12s ;
   font-size: 15px;
   top:15%;  
   z-index: 1;
