@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import {Routes, Route} from 'react-router-dom';
+import Planets from "./components/Planets";
+import data from './data.json'
 
 function App() {
+  const colors = ['#419EBB', '#F7CC7F', '#545BFE', '#FF6A45', '#ECAD7A', '#FCCB6B', '#65F0D5', '#497EFA'];
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Routes>
+          <Route path="/" element={<Header colors={colors}/>}>
+          <Route path="/:name" element={<Planets colors={colors} data={data}/>}/>
+          </Route>
+      </Routes>
   );
 }
 
