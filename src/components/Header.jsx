@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import data from '../data.json'
 import chevronIcon from '../assets/icon-chevron.svg'
 import {Link} from 'react-router-dom'
-import { useEffect } from 'react'
 
 const Header = ({colors, barIsOpen, setBarIsOpen}) => {
 

@@ -16,22 +16,25 @@ const Planets = ({data, barIsOpen, colors, global}) => {
   
   const activeHandler = (name)=>{
    const activeoverview = overview.filter((item)=>item === name);
-   setActive(activeoverview)
+   setActive(name)
    setType(activeoverview)
  }
-
+ useEffect(()=>{
+  setActive('overview')
+ },[])
+ 
   return (
     !barIsOpen && <MainDiv>
     <FilterHeader>
     <Overview color={colors[findPlanetIndex]}> 
     {overview.map((item, index)=>{
-          return <div key={index} onClick={()=>activeHandler(item)} className={`${active === item && 'active'}`}>{item}</div>
+          return <div key={index} onClick={()=>activeHandler(item)} defaultV={type === item} className={`${active === item && 'active'}`}>{item}</div>
       })}
       </Overview>
     </FilterHeader>
       <hr style={{opacity:'0.2', background:'#FFFFFF', mixBlendMode:'normal',height:'1px'}}/>
 
-    <StyledElements barIsOpen={barIsOpen} style={{color:'white'}} key={planet.name}>
+    <StyledElements barIsOpen={barIsOpen} style={{color:'white'}} key={planet.name} >
         <img src={process.env.PUBLIC_URL + planet.images.planet} alt={name} style={{width:'111px', height:'111px'}}/>
         <h4>{planet.name}</h4>
         <p>{planet[type].content}</p>
@@ -121,6 +124,8 @@ const Overview = styled.div`
   display:flex;
   gap:20px;
   justify-content:space-between;
+
+
   div{
     font-family: 'Spartan';
     font-style: normal;
@@ -132,11 +137,11 @@ const Overview = styled.div`
     letter-spacing: 1.92857px;
     text-transform: uppercase;
     color: #FFFFFF;
+    
 
   }
   .active{
     display:block;
-    /* background: ${props => props.color}; */
     text-decoration: underline;
     text-decoration-thickness: 5px;
     text-decoration-color: ${props=>props.color};
