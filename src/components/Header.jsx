@@ -30,6 +30,7 @@ const Header = ({colors, barIsOpen, setBarIsOpen}) => {
             </Items>
          })}
 
+
        </Menu>
     </MainHeader>
   )

@@ -5,56 +5,61 @@ import wkpdImage from '../assets/icon-source.svg';
 
 
 
-const Planets = ({data, barIsOpen, colors}) => {
+const Planets = ({data, barIsOpen, colors, global}) => {
   const {name} = useParams()
+  const [active, setActive] = useState(null)
+  const [type, setType] = useState('overview')
 
- const filterPlanets = data.filter((item)=>item.name === name)
- const overview = ['overview', 'structure', 'geology'];
- const findPlanetIndex = data.findIndex((item)=>item.name === name);
-
+ const planet = !global ? data.find((item)=>item.name === name) : data.find((item)=>item.name === 'Mars');
+  const overview = ['overview', 'structure', 'geology']; 
+  const findPlanetIndex = data.findIndex((item)=>item.name === name);
+  
+  const activeHandler = (name)=>{
+   const activeoverview = overview.filter((item)=>item === name);
+   setActive(activeoverview)
+   setType(activeoverview)
+ }
 
   return (
     !barIsOpen && <MainDiv>
     <FilterHeader>
     <Overview color={colors[findPlanetIndex]}> 
     {overview.map((item, index)=>{
-          return <div key={index}>{item}</div>
-        })}
+          return <div key={index} onClick={()=>activeHandler(item)} className={`${active === item && 'active'}`}>{item}</div>
+      })}
       </Overview>
     </FilterHeader>
       <hr style={{opacity:'0.2', background:'#FFFFFF', mixBlendMode:'normal',height:'1px'}}/>
 
-      {filterPlanets.map((item)=>{
-        return <StyledElements barIsOpen={barIsOpen} style={{color:'white'}} key={item.name} >
-        <img src={process.env.PUBLIC_URL + item.images.planet} alt={name} style={{width:'111px', height:'111px'}}/>
-        <h4>{item.name}</h4>
-        <p>{item.overview.content}</p>
-        <a href={item.overview.source}>Source: Wikipedia:  <img src={wkpdImage} alt="wikipedia-image"/></a>
+    <StyledElements barIsOpen={barIsOpen} style={{color:'white'}} key={planet.name}>
+        <img src={process.env.PUBLIC_URL + planet.images.planet} alt={name} style={{width:'111px', height:'111px'}}/>
+        <h4>{planet.name}</h4>
+        <p>{planet[type].content}</p>
+        <a href={planet.overview.source} target="blank">Source: Wikipedia:  <img src={wkpdImage} alt="wikipedia-image"/></a>
         
         <PlanetsStatistic>
          <div>
            <span style={{opacity:'0.4', fontSize:'11px', fontFamily:'Spartan', lineHeight:'15px'}}>ROTATION TIME: </span>
-           <span>{item.rotation}</span> 
+           <span>{planet.rotation}</span> 
          </div>
 
          <div>
            <span style={{opacity:'0.4', fontSize:'11px', fontFamily:'Spartan', lineHeight:'15px'}}>REVOLUTION TIME: </span>
-           <span >{item.revolution}</span> 
+           <span >{planet.revolution}</span> 
          </div>
 
          <div>
            <span style={{opacity:'0.4', fontSize:'11px', fontFamily:'Spartan', lineHeight:'15px'}}>PLANET RADIUS: </span>
-           <span >{item.radius}</span> 
+           <span >{planet.radius}</span> 
          </div>
 
          <div>
            <span style={{opacity:'0.4', fontSize:'11px', fontFamily:'Spartan', lineHeight:'15px'}}>AVERAGE TEMP: </span>
-           <span >{item.temperature}</span> 
+           <span >{planet.temperature}</span> 
          </div>
         </PlanetsStatistic>
       
         </StyledElements>
-      })}
     </MainDiv>
     )
 }
@@ -127,16 +132,24 @@ const Overview = styled.div`
     letter-spacing: 1.92857px;
     text-transform: uppercase;
     color: #FFFFFF;
+
   }
-  div:hover{
+  .active{
+    display:block;
     /* background: ${props => props.color}; */
-    text-decoration:underline;
     text-decoration: underline;
     text-decoration-thickness: 5px;
     text-decoration-color: ${props=>props.color};
     text-underline-offset: 12px;
-
   }
+  div:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 5px;
+    text-underline-offset: 12px;
+    text-decoration-color: ${props=>props.color};
+    text-shadow: inset 100px 0 0 0 #54b3d6;
+    transform-origin: bottom left;
+  } 
 `
 
 const PlanetsStatistic = styled.div`

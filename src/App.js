@@ -14,6 +14,7 @@ function App() {
     <Header colors={colors} data={data} barIsOpen={barIsOpen} setBarIsOpen={setBarIsOpen}/>
        <Routes>
           <Route path="planets/:name" element={<Planets colors={colors} data={data} barIsOpen={barIsOpen} />}/>
+          <Route path="/" element={<Planets colors={colors} data={data} barIsOpen={barIsOpen} global/>}/>
        </Routes>
     </div>
   );
