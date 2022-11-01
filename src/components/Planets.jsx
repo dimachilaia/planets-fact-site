@@ -19,23 +19,26 @@ const Planets = ({data, barIsOpen, colors, global}) => {
    setActive(name)
    setType(activeoverview)
  }
+
  useEffect(()=>{
   setActive('overview')
  },[])
+
  
   return (
     !barIsOpen && <MainDiv>
     <FilterHeader>
     <Overview color={colors[findPlanetIndex]}> 
     {overview.map((item, index)=>{
-          return <div key={index} onClick={()=>activeHandler(item)} defaultV={type === item} className={`${active === item && 'active'}`}>{item}</div>
+          return <div key={index} onClick={()=>activeHandler(item)} className={`${active === item && 'active'}`}>{item}</div>
       })}
       </Overview>
     </FilterHeader>
       <hr style={{opacity:'0.2', background:'#FFFFFF', mixBlendMode:'normal',height:'1px'}}/>
 
     <StyledElements barIsOpen={barIsOpen} style={{color:'white'}} key={planet.name} >
-        <img src={process.env.PUBLIC_URL + planet.images.planet} alt={name} style={{width:'111px', height:'111px'}}/>
+      <img src={active !== 'structure' ?process.env.PUBLIC_URL + planet.images.planet  : process.env.PUBLIC_URL + planet.images.internal} alt={name} style={{width:'180px'}}/>
+      {active === 'geology' && <GeologyImage src={ process.env.PUBLIC_URL + planet.images.geology} />}
         <h4>{planet.name}</h4>
         <p>{planet[type].content}</p>
         <a href={planet.overview.source} target="blank">Source: Wikipedia:  <img src={wkpdImage} alt="wikipedia-image"/></a>
@@ -175,4 +178,9 @@ const PlanetsStatistic = styled.div`
     letter-spacing: -0.75px;
     text-transform: uppercase;
   }
+`
+const GeologyImage = styled.img`
+ width:80px;
+ position:absolute;
+ transform:translateY(110px);
 `
