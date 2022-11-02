@@ -35,27 +35,37 @@ const Planets = ({data, barIsOpen, colors, global}) => {
       </Overview>
     </FilterHeader>
       <hr style={{opacity:'0.2', background:'#FFFFFF', mixBlendMode:'normal',height:'1px'}}/>
+      
+      <DesktopOverview color={colors[findPlanetIndex]}>
+      {overview.map((item, index)=>{
+        return <div key={index} onClick={()=>activeHandler(item)} className={`${active === item && 'active'}`}>{item}</div>
+      })}
+    </DesktopOverview>
 
     <StyledElements barIsOpen={barIsOpen} style={{color:'white'}} key={planet.name} >
+    
       <img src={active !== 'structure' ?process.env.PUBLIC_URL + planet.images.planet  : process.env.PUBLIC_URL + planet.images.internal} alt={name} style={{width:'180px'}}/>
       {active === 'geology' && <GeologyImage src={ process.env.PUBLIC_URL + planet.images.geology} />}
-        <h4>{planet.name}</h4>
+      <PlanetType>
+      <h4>{planet.name}</h4>
         <p>{planet[type].content}</p>
         <a href={planet.overview.source} target="blank">Source: Wikipedia:  <img src={wkpdImage} alt="wikipedia-image"/></a>
+      </PlanetType>
+       
         
         <PlanetsStatistic>
          <div>
-           <span style={{opacity:'0.4', fontSize:'11px', fontFamily:'Spartan', lineHeight:'15px'}}>ROTATION TIME: </span>
+           <span style={{opacity:'0.4', fontSize:'12px', fontFamily:'Spartan', lineHeight:'15px'}}>ROTATION TIME: </span>
            <span>{planet.rotation}</span> 
          </div>
 
          <div>
-           <span style={{opacity:'0.4', fontSize:'11px', fontFamily:'Spartan', lineHeight:'15px'}}>REVOLUTION TIME: </span>
+           <span style={{opacity:'0.4', fontSize:'12px', fontFamily:'Spartan', lineHeight:'15px'}}>REVOLUTION TIME: </span>
            <span >{planet.revolution}</span> 
          </div>
 
          <div>
-           <span style={{opacity:'0.4', fontSize:'11px', fontFamily:'Spartan', lineHeight:'15px'}}>PLANET RADIUS: </span>
+           <span style={{opacity:'0.4', fontSize:'12px', fontFamily:'Spartan', lineHeight:'15px'}}>PLANET RADIUS: </span>
            <span >{planet.radius}</span> 
          </div>
 
@@ -76,13 +86,20 @@ const MainDiv = styled.div`
 `
 const FilterHeader = styled.div`
  padding:16px 24px;
+ @media screen and (min-width: 768px) {
+      display:none;
+    }
 `
 const StyledElements = styled.div`
   display:flex;
   flex-direction:column;
   align-items:center;
+  
   img{
-    margin-top:116px;
+    margin-top:55px;
+  @media screen and (min-width: 768px) {
+    transform:translateY(-80px);
+    }
   }
   h4{
     font-family: 'Antonio';
@@ -107,7 +124,7 @@ const StyledElements = styled.div`
     width:327px;
   }
   a{
-    transform:translateY(-90px);
+    transform:translateY(-30px);
     font-family: 'Spartan';
     font-style: normal;
     font-weight: 400;
@@ -121,6 +138,28 @@ const StyledElements = styled.div`
   a:hover{
     color:red;
   }
+`
+const PlanetType = styled.div`
+display:flex;
+flex-direction:column;
+text-align:center;
+   @media screen and (min-width: 768px) {
+    margin-top:70px;
+      width:50%;
+     display:flex;
+     flex-direction:column;
+     align-items:flex-start;
+     transform:translate(-150px,-150px);
+     p{
+      text-align:start;
+      font-size: 13.4px;
+      opacity:0.6;
+     }
+     img{
+      transform:translateY(2px)
+     }
+    }
+
 `
 
 const Overview = styled.div`
@@ -160,9 +199,17 @@ const Overview = styled.div`
   } 
 `
 
+
+
 const PlanetsStatistic = styled.div`
     transform:translateY(-40px);
     opacity:0.9;
+    @media screen and (min-width: 768px) {
+      display:flex;
+      width:84%;
+      gap:25px;
+      text-align:center;
+    }
 
   div{
     mix-blend-mode: normal;
@@ -173,14 +220,57 @@ const PlanetsStatistic = styled.div`
     margin-top:10px;
     justify-content:space-around;
     align-items:center;
+    @media screen and (min-width: 768px) {
+      display:flex;
+      flex-direction:column;
+      height:88px;
+    }
   }
   span{
     letter-spacing: -0.75px;
     text-transform: uppercase;
+    @media screen and (min-width: 768px) {
+      font-size: 24px;
+    }
   }
 `
 const GeologyImage = styled.img`
  width:80px;
  position:absolute;
  transform:translateY(110px);
+
+`
+const DesktopOverview = styled.div`
+  display:none;
+  @media screen and (min-width: 768px) {
+      display:flex;
+      gap:10px;
+      flex-direction:column;
+      align-items:flex-end;
+      transform:translate(0, 420px);
+      margin-right:50px;
+    }
+  
+
+  div{
+    font-family: 'Spartan';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 10px;
+    cursor:pointer;
+    width:30%;
+    letter-spacing: 1.92857px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding:18px 32px;
+    background: #419EBB;
+    border-radius:1px solid blue;
+  }
+  .active{
+  }
+  div:hover{
+    opacity:0.5;
+  } 
+   
 `
