@@ -2,16 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import wkpdImage from '../assets/icon-source.svg';
+import PlanetsHeader from './PlanetsHeader';
 
 
 
 const Planets = ({data, barIsOpen, colors, global}) => {
   const {name} = useParams()
+
   const [active, setActive] = useState(null)
   const [type, setType] = useState('overview')
 
  const planet = !global ? data.find((item)=>item.name === name) : data.find((item)=>item.name === 'Mars');
-  const overview = ['overview', 'structure', 'geology']; 
+  const overview = ['overview', 'structure', 'geology'];
+
+
+
   const findPlanetIndex = data.findIndex((item)=>item.name === name);
   
   const activeHandler = (name)=>{
@@ -34,8 +39,12 @@ const Planets = ({data, barIsOpen, colors, global}) => {
       })}
       </Overview>
     </FilterHeader>
+
+    <PlanetsHeader data={data} activeHandler={activeHandler} setActive={setActive}  active={active} colors={colors}/>
+
       <hr style={{opacity:'0.2', background:'#FFFFFF', mixBlendMode:'normal',height:'1px'}}/>
-      
+
+
       <DesktopOverview color={colors[findPlanetIndex]}>
       {overview.map((item, index)=>{
         return <div key={index} onClick={()=>activeHandler(item)} className={`${active === item && 'active'}`}>{item}</div>
@@ -94,6 +103,7 @@ const StyledElements = styled.div`
   display:flex;
   flex-direction:column;
   align-items:center;
+  height:100px;
   
   img{
     margin-top:55px;
@@ -123,6 +133,7 @@ const StyledElements = styled.div`
     margin-top:16px;
     width:327px;
   }
+
   a{
     transform:translateY(-30px);
     font-family: 'Spartan';
@@ -158,6 +169,11 @@ text-align:center;
      img{
       transform:translateY(2px)
      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      display:flex;
+    
     }
 
 `
@@ -237,7 +253,10 @@ const PlanetsStatistic = styled.div`
 const GeologyImage = styled.img`
  width:80px;
  position:absolute;
- transform:translateY(110px);
+ transform:translateY(50px);
+  @media screen and (min-width: 768px) {
+    position:fixed;
+      }
 
 `
 const DesktopOverview = styled.div`
@@ -249,8 +268,7 @@ const DesktopOverview = styled.div`
       align-items:flex-end;
       transform:translate(0, 420px);
       margin-right:50px;
-    }
-  
+  }
 
   div{
     font-family: 'Spartan';
@@ -264,13 +282,15 @@ const DesktopOverview = styled.div`
     text-transform: uppercase;
     color: #FFFFFF;
     padding:18px 32px;
-    background: #419EBB;
-    border-radius:1px solid blue;
+    background: #070724;
+    border:1px solid #FFFFFF;
   }
   .active{
+    display:block;
+    text-decoration-color: ${props=>props.color};
+    background-color: ${props=>props.color};
   }
   div:hover{
-    opacity:0.5;
   } 
    
 `

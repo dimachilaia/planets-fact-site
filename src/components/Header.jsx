@@ -23,7 +23,7 @@ const Header = ({colors, barIsOpen, setBarIsOpen}) => {
                 <span></span>
                  <p>{item.name}</p>
                 </div>
-                <img src={chevronIcon}/>
+                <img src={chevronIcon} alt="chevronicon"/>
              </Elements>
             <hr style={{opacity:'0.07', background:'#FFFFFF', mixBlendMode:'normal',height:'1px'}}/>
             </Items>
@@ -44,7 +44,11 @@ const MainHeader = styled.div`
     display:flex;
     justify-content:space-between;
  }
-
+ @media screen and (min-width: 768px) {
+     svg{
+      display:none;
+     }
+    }
 `
 const PlanetTitle= styled(Link)`
     text-decoration:none;
@@ -56,17 +60,18 @@ const PlanetTitle= styled(Link)`
     color:white;
     letter-spacing: -1.05px;
     text-transform: uppercase;
+    @media screen and (min-width: 768px) {
+      margin:0 auto;
+    }
 `
 
 const Menu = styled.div`
   display:flex;
   flex-direction:column;
-  transition:0.12s ;
+  transition:0.42s ;
   font-size: 15px;
   top:15%;  
   z-index: 1;
-
-  /* background: #070724; */
   background: #070724;
   transform: ${props => props.barIsOpen ? 'translateX(12)' : 'translateX(-120%)'};
 
