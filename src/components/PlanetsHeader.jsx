@@ -9,16 +9,14 @@ const PlanetsHeader = ({data, setActive,active, colors}) => {
     const {name} = useParams()
     const findPlanetIndex = data.findIndex((item)=>item.name === name);
 
-    useEffect(()=>{
-        setActive('overview')
-       },[])
-
   return (
     <div>
+    <PlanetsTitle>THE PLANETS</PlanetsTitle>
+  
     <HeaderPlanets color={colors[findPlanetIndex]}> 
         {data.map((item, index)=>{
-            return <HeaderComponent to={`/planets/${item.name}`} key={item.name} className={`${active === item.name && 'active'}`} >
-                <p>{item.name}</p>
+            return <HeaderComponent to={`/planets/${item.name}`} key={index} className={`${active === item.name && 'active'}`} >
+                <h3>{item.name}</h3>
             </HeaderComponent>
         })}
         </HeaderPlanets>
@@ -28,19 +26,53 @@ const PlanetsHeader = ({data, setActive,active, colors}) => {
 
 export default PlanetsHeader
 
+const PlanetsTitle = styled.h1`
+display:none;
+@media screen and (min-width: 1024px) {
+  display:flex;
+  font-family: 'Antonio';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: -1.05px;
+    text-transform: uppercase;
+    margin-left:50px;
+    transform:translateY(10px);
+    color: #FFFFFF;
+  }
+`
 
 const HeaderPlanets = styled.div`
   display:none;
   @media screen and (min-width: 768px) {
      display:flex;
-     gap:20px;
      justify-content:space-evenly;
-   
    .active{
     display:block;
-    text-decoration: overline;
-    text-decoration-thickness: 5px;
+    text-decoration: underline;
+    text-decoration-thickness: 4px;
     text-decoration-color: ${props=>props.color};
+    text-underline-offset: 10px;
+  }
+  
+  h3{
+    opacity:0.7;
+    color: #FFFFFF;
+    font-family: 'Spartan';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 25px;
+    transform:translateY(-25px);
+    letter-spacing: 1px;
+  }
+  @media screen and (min-width: 1024px) {
+    display:flex;
+    justify-content:flex-end;
+    gap:20px;
+    margin-right:35px;
+    align-items:center;
   }
  }
 `
@@ -53,6 +85,7 @@ const HeaderComponent = styled(NavLink)`
     font-weight: 400;
     font-size: 17px;
     line-height: 36px;
+    margin-top:15px;
     color:white;
     letter-spacing: -1.05px;
     text-transform: uppercase;

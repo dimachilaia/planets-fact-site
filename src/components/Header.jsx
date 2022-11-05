@@ -49,6 +49,11 @@ const MainHeader = styled.div`
       display:none;
      }
     }
+    @media screen and (min-width: 768px) {
+     hr{
+      display:none;
+     }
+  }   
 `
 const PlanetTitle= styled(Link)`
     text-decoration:none;
@@ -63,18 +68,25 @@ const PlanetTitle= styled(Link)`
     @media screen and (min-width: 768px) {
       margin:0 auto;
     }
+    @media screen and (min-width: 1024px) {
+      display:none;
+    }
 `
 
 const Menu = styled.div`
   display:flex;
   flex-direction:column;
-  transition:0.42s ;
+  transition:0.25s ;
   font-size: 15px;
+  position:absolute;
+  width:100%;
   top:15%;  
   z-index: 1;
   background: #070724;
   transform: ${props => props.barIsOpen ? 'translateX(12)' : 'translateX(-120%)'};
-
+  @media screen and (min-width: 768px) {
+      display:none;
+    }
 `
 
 const Items = styled.div`
