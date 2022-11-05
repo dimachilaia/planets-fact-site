@@ -15,7 +15,7 @@ const DesktopForm = ({planet, active, overview, setActive, setType, type, colors
   }
 
   useEffect(()=>{
-    setActive('Mars')
+    setActive('overview')
   },[])
 
   return (
