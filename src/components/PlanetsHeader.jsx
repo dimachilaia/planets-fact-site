@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import {NavLink} from 'react-router-dom'
@@ -14,7 +15,7 @@ const PlanetsHeader = ({data,active, colors}) => {
   
     <HeaderPlanets color={colors[findPlanetIndex]}> 
         {data.map((item, index)=>{
-            return <HeaderComponent to={`/planets-fact-site/${item.name}`} key={index} className={`${active === item.name && 'active'}`} >
+            return <HeaderComponent to={`/planets/${item.name}`} key={index} className={`${active === item.name && 'active'}`} >
                 <h3>{item.name}</h3>
             </HeaderComponent>
         })}
@@ -47,6 +48,7 @@ const HeaderPlanets = styled.div`
   @media screen and (min-width: 768px) {
      display:flex;
      justify-content:space-evenly;
+   
    .active{
     display:block;
     text-decoration: underline;
@@ -65,6 +67,10 @@ const HeaderPlanets = styled.div`
     line-height: 25px;
     transform:translateY(-25px);
     letter-spacing: 1px;
+    :hover{
+    opacity:0.6;
+    transition: 0.3s;
+    }
   }
   @media screen and (min-width: 1024px) {
     display:flex;
