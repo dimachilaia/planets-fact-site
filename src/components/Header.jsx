@@ -53,7 +53,7 @@ const MainHeader = styled.div`
      hr{
       display:none;
      }
-  }   
+    }   
 `
 const PlanetTitle= styled(Link)`
     text-decoration:none;

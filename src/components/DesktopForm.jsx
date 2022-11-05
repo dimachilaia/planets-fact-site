@@ -1,4 +1,4 @@
-import React from 'react'
+import {useEffect} from 'react'
 import styled from 'styled-components'
 import wkpdImage from '../assets/icon-source.svg';
 import { useParams } from 'react-router-dom';
@@ -13,6 +13,8 @@ const DesktopForm = ({planet, active, overview, setActive, setType, type, colors
     setActive(name)
     setType(activeoverview)
   }
+
+
   return (
     <DesktopCont>
      <MainImage>
@@ -43,7 +45,7 @@ export default DesktopForm
 
 
 const DesktopCont = styled.div`
-  display:none;
+      display:none;
 
     @media screen and (min-width: 768px) {
         display:flex;
@@ -65,8 +67,8 @@ const DesktopCont = styled.div`
   }
 `
 const MainImage = styled.div`
-margin:0 auto;
-margin-top:70px;
+    margin:0 auto;
+    margin-top:70px;
 img{
   width:180px;
  }
@@ -75,10 +77,8 @@ img{
           width:300px;
         }
   }
-
-
-
 `
+
 const GeologyImage = styled.img`
     position:absolute;
     transform:translate(-130px, 95px);
@@ -86,8 +86,6 @@ const GeologyImage = styled.img`
     transform:translate(-190px, 255px);
   }
 `
-
-
 
 const ForFlex = styled.div`
   display:flex;
@@ -131,19 +129,30 @@ const ForOverview = styled.div`
     margin:0 auto;
     gap:10px;
     transform:translateY(30px);
-    
-
+    text-transform:uppercase;
  div{
-  mix-blend-mode: normal;
-  border: 1px solid #FFFFFF;
-  padding:10px 20px;
-  cursor:pointer;
-  margin-right:45px;
+    mix-blend-mode: normal;
+    border: 1px solid #FFFFFF;
+    padding:10px 20px;
+    cursor:pointer;
+    font-family: 'Spartan';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 25px;
+    letter-spacing: 2.57143px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-right:45px;
  }
  .active{
     display:block;
     text-decoration-color: ${props=>props.color};
     background-color: ${props=>props.color};
   } 
+  div:hover{
+    background-color: ${props=>props.color};
+    transition:0.6s;
+  }
  
 `

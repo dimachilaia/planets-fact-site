@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import wkpdImage from '../assets/icon-source.svg';
 import DesktopForm from './DesktopForm';
-import PlanetElements from './PlanetElements';
 import PlanetsHeader from './PlanetsHeader';
 
 
@@ -22,9 +21,9 @@ const Planets = ({data, barIsOpen, colors, global}) => {
   const findPlanetIndex = data.findIndex((item)=>item.name === name);
   
   const activeHandler = (name)=>{
-   const activeoverview = overview.filter((item)=>item === name);
-   setActive(name)
-   setType(activeoverview)
+    const activeoverview = overview.filter((item)=>item === name);
+    setActive(name)
+    setType(activeoverview)
  }
 
  useEffect(()=>{
@@ -48,7 +47,6 @@ const Planets = ({data, barIsOpen, colors, global}) => {
 
       <hr style={{opacity:'0.2', background:'#FFFFFF', mixBlendMode:'normal',height:'1px'}}/>
       
-      <PlanetElements planet={planet} type={type}/>
       
        <DesktopForm planet={planet} active={active} overview={overview} setActive={setActive} setType={setType} type={type} colors={colors} data={data}/>
 
@@ -68,7 +66,7 @@ const Planets = ({data, barIsOpen, colors, global}) => {
         <h4>{planet.name}</h4>
           <p>{planet[type].content}</p>
           <a href={planet.overview.source} target="blank">Source: Wikipedia:  
-          <img src={wkpdImage} alt="wikipedia-image"/>
+          <img src={wkpdImage} alt="wikipediaimage"/>
         </a>
       </PlanetType>
        
@@ -120,71 +118,14 @@ const StyledElements = styled.div`
         display:none;
       }
   }
-    
-  /* display:flex;
-  flex-direction:column;
-  align-items:center;
-  height:50vh;
-  
-  img{
-    margin-top:55px;
-  @media screen and (min-width: 768px) {
-    transform:translateY(-80px);
-    }
-    @media screen and (min-width: 1024px) {
-    }
-  }
-  h4{
-    font-family: 'Antonio';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 52px;
-    text-align: center;
-    text-transform: uppercase;
-    color: #FFFFFF;
-    margin-top:80px;
-  }
-  p{
-    font-family: 'Spartan';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 22px;
-    text-align: center;
-    color: #FFFFFF;
-    margin-top:16px;
-    width:327px;
-  }
 
-  a{
-    transform:translateY(-30px);
-    font-family: 'Spartan';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 25px;
-    text-decoration:none;
-    color: #FFFFFF;
-    mix-blend-mode: normal;
-    opacity: 0.5;
-  }
-  a:hover{
-    color:red;
-  } */
 `
 const DesktopImg = styled.div`
 margin-top:100px;
 img{
   width:200px;
 }
-/* img{
-  width:180px;
-  @media screen and (min-width: 1024px) {
-      width:400px;
-      transform:translate(300px, -290px)
-  } 
- } */
+
 `
 
 // * პლანეტების დასახელება (ვიკიპ) * //
@@ -231,30 +172,6 @@ padding:10px 20px;
       display:none;
     } 
 
-/* display:flex;
-flex-direction:column;
-text-align:center;
-   @media screen and (min-width: 768px) {
-    margin-top:70px;
-      width:50%;
-     display:flex;
-     flex-direction:column;
-     align-items:flex-start;
-     transform:translate(-150px,-150px);
-     p{
-      text-align:start;
-      font-size: 13.4px;
-      opacity:0.6;
-     }
-     img{
-      transform:translateY(2px)
-     }
-    }
-
-    @media screen and (min-width: 1024px) {
-      display:none;
-    } */
-
 
 `
 
@@ -280,14 +197,7 @@ justify-content:space-between;
     text-decoration-color: ${props=>props.color};
     text-underline-offset: 12px;
   }
-  /* div:hover{
-    text-decoration: underline;
-    text-decoration-thickness: 5px;
-    text-underline-offset: 12px;
-    text-decoration-color: ${props=>props.color};
-    text-shadow: inset 100px 0 0 0 #54b3d6;
-    transform-origin: bottom left;
-  }   */
+
    @media screen and (min-width: 768px) {
       display:none;
     }
@@ -301,11 +211,10 @@ opacity:0.9;
       display:flex;
       width:84%;
       gap:25px;
-    }
+}
    
 
   div{
-
     mix-blend-mode: normal;
     border: 1px solid #fff;
     width: 327px;
@@ -314,10 +223,12 @@ opacity:0.9;
     margin-top:10px;
     justify-content:space-around;
     align-items:center;
+   
     @media screen and (min-width: 768px) {
       display:flex;
       flex-direction:column;
       height:88px;
+    
     }
   }
   span{
@@ -326,6 +237,10 @@ opacity:0.9;
     @media screen and (min-width: 768px) {
       font-size: 24px;
     }
+    @media screen and (min-width: 1024px) {
+      font-size: 35px;
+    }
+  
   } 
 
 `
@@ -337,53 +252,8 @@ top:40%;
 @media screen and (min-width: 768px) {
   display:none;
  } 
- /* width:80px;
- position:absolute;
- transform:translateY(50px);
-
- @media screen and (min-width: 1024px) {
-    margin-left:300px;
-    width:120px;
-    } */
 
 `
 const DesktopOverview = styled.div`
 display:none;
-
-  /* display:none;
-  @media screen and (min-width: 768px) {
-      display:flex;
-      gap:10px;
-      flex-direction:column;
-      align-items:flex-end;
-      transform:translate(0, 420px);
-      margin-right:50px;
-  }
-  @media screen and (min-width: 1024px) {
-    transform:translateX(88px);
-    align-items:flex-start;
-    padding:10px 50px;
-  }
-
-  div{
-    font-family: 'Spartan';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 11px;
-    line-height: 10px;
-    cursor:pointer;
-    width:30%;
-    letter-spacing: 1.92857px;
-    text-transform: uppercase;
-    color: #FFFFFF;
-    padding:18px 32px;
-    background: #070724;
-    border:1px solid #FFFFFF;
-  }
-  .active{
-    display:block;
-    text-decoration-color: ${props=>props.color};
-    background-color: ${props=>props.color};
-  } */
-   
 `
