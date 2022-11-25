@@ -28,7 +28,7 @@ const Planets = ({data, barIsOpen, colors, global}) => {
 
  useEffect(()=>{
   setActive('overview')
- },[data])
+ },[])
 
  
   return (
